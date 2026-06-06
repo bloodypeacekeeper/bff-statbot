@@ -1,0 +1,74 @@
+{
+    "users": [
+        {
+            "id": "1049089518",
+            "discordid": "680892416672530623",
+            "ign": "Bloody_pk",
+            "clanTag": "BF-V",
+            "clanId": "1000061921",
+            "exemptions": {
+                "winRate": false,
+                "randomBattles": false,
+                "tier10Ships": false,
+                "attendance": false,
+                "loaUntil": null
+            },
+            "exemptRequirements": false,
+            "registeredAt": "2026-06-06T05:00:41.550Z",
+            "gamesplayed": 1774,
+            "clanBattles": 348,
+            "winrate": "50.79",
+            "stats": {
+                "randomBattles": 1774,
+                "clanBattles": 348,
+                "activityBattles": 2122,
+                "wins": 901,
+                "losses": 872,
+                "draws": 1,
+                "winRate": 50.79,
+                "lastBattleTime": 1780728098
+            },
+            "activity": {
+                "lastBattleIncreaseAt": "2026-06-06T05:00:41.550Z",
+                "lastKnownRandomBattles": 1774,
+                "lastKnownActivityBattles": 2122,
+                "lastActivityAlertAt": "2026-06-06T19:17:03.619Z"
+            }
+        },
+        {
+            "id": "1064392618",
+            "discordid": "184829107945603072",
+            "ign": "Conundrum",
+            "clanTag": "BF-V",
+            "clanId": "1000061921",
+            "exemptions": {
+                "winRate": false,
+                "randomBattles": false,
+                "tier10Ships": false,
+                "attendance": false,
+                "loaUntil": null
+            },
+            "exemptRequirements": false,
+            "registeredAt": "2026-06-06T05:13:35.864Z",
+            "gamesplayed": 3509,
+            "clanBattles": 865,
+            "winrate": "49.10",
+            "stats": {
+                "randomBattles": 3509,
+                "clanBattles": 865,
+                "activityBattles": 4374,
+                "wins": 1723,
+                "losses": 1786,
+                "draws": 0,
+                "winRate": 49.1,
+                "lastBattleTime": 1780770693
+            },
+            "activity": {
+                "lastBattleIncreaseAt": "2026-06-06T05:13:35.864Z",
+                "lastKnownRandomBattles": 3509,
+                "lastKnownActivityBattles": 4374,
+                "lastActivityAlertAt": "2026-06-06T19:17:03.619Z"
+            }
+        }
+    ]
+}
