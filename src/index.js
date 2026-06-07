@@ -242,7 +242,7 @@ async function handleRoster(interaction) {
             nickname: stats?.nickname || member.nickname || member.accountId,
             randomBattles,
             winRate,
-            score: winRate + (randomBattles / 250)
+            score: winRate + (Math.log(randomBattles) * 1.25)
         };
     }).sort((left, right) => right.score - left.score);
 
@@ -493,8 +493,9 @@ async function runDailyChecks() {
                     formatMessage(CONFIG.messages.attendanceDm, {
                         ign: user.ign,
                         user: `<@${user.discordid}>`,
-                        days: attendanceDays
-                    })
+                        days: attendanceDays,
+                        clan: user.clanTag
+                    }).replace(/\\n/g, '\n')
                 );
             }
 
