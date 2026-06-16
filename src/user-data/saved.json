@@ -42,32 +42,32 @@
             "clanTag": "BF-V",
             "clanId": "1000061921",
             "exemptions": {
-                "winRate": false,
+                "winRate": true,
                 "randomBattles": false,
                 "tier10Ships": false,
-                "attendance": false,
+                "attendance": true,
                 "loaUntil": null
             },
             "exemptRequirements": false,
-            "registeredAt": "2026-06-06T05:13:35.864Z",
-            "gamesplayed": 3509,
+            "registeredAt": "2026-06-16T15:23:04.429Z",
+            "gamesplayed": 3558,
             "clanBattles": 865,
-            "winrate": "49.10",
+            "winrate": "49.07",
             "stats": {
-                "randomBattles": 3509,
+                "randomBattles": 3558,
                 "clanBattles": 865,
-                "activityBattles": 4374,
-                "wins": 1723,
-                "losses": 1786,
+                "activityBattles": 4423,
+                "wins": 1746,
+                "losses": 1812,
                 "draws": 0,
-                "winRate": 49.1,
-                "lastBattleTime": 1780770693
+                "winRate": 49.07,
+                "lastBattleTime": 1781595657
             },
             "activity": {
-                "lastBattleIncreaseAt": "2026-06-06T05:13:35.864Z",
-                "lastKnownRandomBattles": 3509,
-                "lastKnownActivityBattles": 4374,
-                "lastActivityAlertAt": "2026-06-06T23:04:53.947Z"
+                "lastBattleIncreaseAt": "2026-06-16T15:24:32.895Z",
+                "lastKnownRandomBattles": 3558,
+                "lastKnownActivityBattles": 4423,
+                "lastActivityAlertAt": null
             }
         }
     ]

@@ -49,7 +49,7 @@ const client = new Client({
 client.once(Events.ClientReady, () => {
     console.log(`Bot has started as ${client.user.tag}.`);
     client.user.setPresence({
-        activities: [{ name: 'Watching BF stats', type: ActivityType.Watching }],
+        activities: [{ name: 'Watching BF Stats', type: ActivityType.Watching }],
         status: 'dnd'
     });
 
@@ -153,6 +153,7 @@ async function handleRegister(interaction) {
     const clanTag = interaction.options.getString('clan', true);
     const exemptions = getRegistrationExemptionsFromInteraction(interaction);
     const clan = getClan(clanTag);
+    const logChannel = await client.channels.fetch(CONFIG.alertChannelId);
 
     ensureClanCanManageDiscordRole(clan);
 
@@ -200,6 +201,30 @@ async function handleRegister(interaction) {
         clan: clanTag,
         ign: account.nickname
     })}${nicknameNote}`);
+
+    const exemptionsNote = [];
+
+    if (exemptions.winRate) {
+        exemptionsNote.push('Win Rate');
+    }
+
+    if (exemptions.randomBattles) {
+        exemptionsNote.push('Random Battles');
+    }
+
+    if (exemptions.tier10Ships) {
+        exemptionsNote.push('Tier 10 Ships');
+    }
+
+    if (exemptions.attendance) {
+        exemptionsNote.push('Attendance');
+    }
+
+    const exemptionsMessage = exemptionsNote.length > 0
+        ? ` Exemptions: ${exemptionsNote.join(', ')}`
+        : '';
+
+    await logChannel.send(`<@${discordUser.id}> was registered to **${clanTag}** under the ign of **${account.nickname}** by <@${interaction.user.id}>.${exemptionsMessage}`);
 }
 
 async function handleNonRegistered(interaction) {
@@ -395,6 +420,7 @@ async function handleLoa(interaction) {
     const untilInput = interaction.options.getString('until', true).trim();
     const data = await DataManager.readJSON();
     const user = data.users.find(savedUser => String(savedUser.discordid) === String(discordUser.id));
+    const logChannel = await client.channels.fetch(CONFIG.alertChannelId);
 
     if (!user) {
         return interaction.editReply(`<@${discordUser.id}> is not registered.`);
@@ -405,6 +431,9 @@ async function handleLoa(interaction) {
     if (untilInput.toLowerCase() === 'clear') {
         user.exemptions.loaUntil = null;
         await DataManager.saveJSON(data);
+
+        await logChannel.send(`<@${interaction.user.id}> cleard LOA for <@${discordUser.id}>. Attendance checks will now be considered.`);
+
         return interaction.editReply(`Cleared LOA for **${user.ign}**.`);
     }
 
@@ -417,6 +446,8 @@ async function handleLoa(interaction) {
     await DataManager.saveJSON(data);
 
     await interaction.editReply(`Set LOA for **${user.ign}** through **${untilInput}**. Attendance checks are exempt until then.`);
+
+    await logChannel.send(`<@${interaction.user.id}> set LOA for <@${discordUser.id}> through **${untilInput}**. Attendance checks are exempt until then.`);
 }
 
 async function handleTestAlerts(interaction) {
@@ -461,6 +492,9 @@ async function runDailyChecks() {
         const clanMembers = await WargamingApi.getConfiguredClanMembers();
         const clanMemberLookup = new Map(clanMembers.map(member => [String(member.accountId), member]));
         const now = Date.now();
+        const logChannel = await client.channels.fetch(CONFIG.alertChannelId);
+
+        await logChannel.send("Running Daily Checks.");
 
         for (const user of data.users) {
             const stats = user.stats || statsFromLegacyUser(user);
