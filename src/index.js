@@ -127,6 +127,7 @@ async function handleButtonInteraction(interaction) {
         const accountId = interaction.customId.split(':')[1];
         const guild = interaction.guild || await getGuildForDailyChecks();
         const result = await unregisterUserByAccountId(accountId, guild);
+        const logChannel = await client.channels.fetch(CONFIG.alertChannelId);
 
         if (!result.removedUser) {
             return interaction.editReply('That user is no longer registered.');
@@ -134,6 +135,8 @@ async function handleButtonInteraction(interaction) {
 
         await disableButtonMessage(interaction, `Unregistered ${result.removedUser.ign}`);
         await interaction.editReply(formatUnregisterResult(result));
+
+        await logChannel.send(`**${result.removedUser.ign}** was removed by <@${interaction.user.id}>.`);
     } catch (error) {
         console.error('Unregister button failed:', error);
         await interaction.editReply(`Error: ${error.message}`);
@@ -384,6 +387,9 @@ async function handleRemove(interaction) {
 
     const result = await unregisterUserByAccountId(data.users[userIndex].id, interaction.guild);
     await interaction.editReply(formatUnregisterResult(result));
+
+    const logChannel = await client.channels.fetch(CONFIG.alertChannelId);
+    await logChannel.send(`**${result.removedUser.ign}** was removed by <@${interaction.user.id}>.`);
 }
 
 async function handleExemptions(interaction) {
